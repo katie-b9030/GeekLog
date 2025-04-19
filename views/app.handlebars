@@ -7,20 +7,21 @@
   </head>
   <body>
     <nav>
-      <a href="/login"></a>
-      <div class="navlink"><a href="/logout">Log out</a></div>
-      <div class="userGreeting">
-        <p>Hello there,
-          <span id="name">{{name}}</span>!
-        </p>
+      <!-- <a href="/login"></a> -->
+      <div class="navlink"><a href="/maker">Create Media</a></div>
+      <div class="navlink"><a href="/log">View Log</a></div>
+      <div class="userGreeting navlink">
+        Hello there,
+        <span id="name">{{name}}</span>!
       </div>
+      <div class="navlink"><a href="/logout">Log Out</a></div>
     </nav>
 
     <section id="app">
 
     </section>
 
-    <div id="somethingMessage" class="hidden">
+    <div id="logMessage" class="hidden">
       <h3><span id="errorMessage"></span></h3>
     </div>
     <script src="/assets/appBundle.js"></script>

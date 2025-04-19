@@ -1,34 +1,34 @@
-const controllers = require("./controllers");
-const mid = require("./middleware");
+const controllers = require('./controllers');
+const mid = require('./middleware');
 
 const router = (app) => {
   app.get(
-    "/login",
+    '/login',
     mid.requiresSecure,
     mid.requiresLogout,
-    controllers.Account.loginPage
+    controllers.Account.loginPage,
   );
   app.post(
-    "/login",
+    '/login',
     mid.requiresSecure,
     mid.requiresLogout,
-    controllers.Account.login
+    controllers.Account.login,
   );
 
   app.post(
-    "/signup",
+    '/signup',
     mid.requiresSecure,
     mid.requiresLogout,
-    controllers.Account.signup
+    controllers.Account.signup,
   );
 
-  app.get("/logout", mid.requiresLogin, controllers.Account.logout);
+  app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
   app.get(
-    "/",
+    '/',
     mid.requiresSecure,
     mid.requiresLogout,
-    controllers.Account.loginPage
+    controllers.Account.loginPage,
   );
 };
 
