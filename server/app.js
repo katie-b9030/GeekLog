@@ -53,7 +53,7 @@ redisClient.connect().then(() => {
       store: new RedisStore({
         client: redisClient,
       }),
-      secret: '',
+      secret: 'nerd',
       resave: false,
       saveUninitialized: false,
     }),
