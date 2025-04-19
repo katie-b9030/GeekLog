@@ -1,4 +1,4 @@
-const models = require('../modles');
+const models = require('../models');
 
 const { Media } = models;
 
@@ -46,7 +46,7 @@ const makeMedia = async (req, res) => {
 const getMedia = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Domo.find(query).select('title format').lean().exec();
+    const docs = await Media.find(query).select('title format').lean().exec();
 
     return res.json({ media: docs });
   } catch (err) {

@@ -8,7 +8,7 @@ const MediaSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    set: setName,
+    set: setTitle,
   },
   format: {
     type: String,
@@ -36,5 +36,5 @@ MediaSchema.statics.toApi = (doc) => ({
   comments: doc.comments,
 });
 
-const MediaModel = mongoose.model('Media', MediaModel);
+const MediaModel = mongoose.model('Media', MediaSchema);
 module.exports = MediaModel;
