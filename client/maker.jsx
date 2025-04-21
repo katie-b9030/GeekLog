@@ -81,6 +81,9 @@ const App = () => {
 };
 
 const init = () => {
+  console.log("Loading React App...");
+  console.log("app div:", document.getElementById("app"));
+
   const root = createRoot(document.getElementById("app"));
   root.render(<App />);
 };

@@ -1,0 +1,39 @@
+1.  What is the intended purpose of your application?
+GeekLog is meant to let people keep track of the media they watch, as well as their favorite characters and thoughts about that piece. As many of us have media that we like to keep track of, I thought it might be useful to create a tool to let us keep track of our favorites and remember why we love them so much.
+
+2.  What work has been completed for this milestone?
+I have implemented my new model and controller and most of the functionality for the app. I have a way for a user to add a title and format of the media, as well as optional favorite characters and comments about the media.
+
+3.  What work is left, and how do you plan to complete it?
+My crucial piece is to make sure my maker page shows up to create all my styling and implement my profit model. If I have time, I also want to add the ability to update an entry and potentially add the ability to mark something as your current favorite.
+
+    a)  What does your timeline/roadmap look like to finish on time?
+    My goal is to implement my styles by Thursday, then try to add the profit model by Sunday, and then try to get the update media and/or favorite functionality done by Tuesday.
+
+4.  How are you using React?
+I'm using React to dynamically switch between my login and signup forms, and to dynamically populate each of the media pieces in my log. Also I hope to use it to switch between the create media and update media forms. I might use it to dynamically update the favorites on a side panel of the log page as well.
+
+    a)  What components have you made?
+    I have created a dynamic log that dynamically populates sections based on whether media of a certain type has been created yet.
+
+    b)  What components do you still plan to add?
+    I hope to add dynamic favorites and update the maker pages to change dynamically with new fields when the premium button is clicked.
+
+5.  What data are you storing in MongoDB?
+I'm storing account data and media data in MongoDB, including, names, usernames, hashed passwords, media titles, media types, optional favorite characters, and optional comments.
+
+    a)  What data do you still need to store?
+    I will eventually probably need to store a rating, quotes, and whether it's a favorite if I'm able to implement everything I hope to.
+
+6.  What is your profit model?
+My hope is to create a premium button that allows users to add a rating and quotes to a piece of media.
+
+    b)  Have you implemented it yet?
+    No, I have not started to implement it.
+
+7.  Do you have a plan for going above and beyond? If so, what is it?
+I do not currently have a plan for my above and beyond.
+
+8.  If you used any borrowed code or code fragments, where did you get them from?
+What do the code fragments do? Where are they in your code?
+So far, the borrowed code fragments I have is the base from DomoMaker E, including all of the Account features, login.jsx, and the base functionality of several other functions.
