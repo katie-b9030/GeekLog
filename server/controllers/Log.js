@@ -26,7 +26,7 @@ const makeMedia = async (req, res) => {
   try {
     const newMedia = new Media(mediaData);
     await newMedia.save();
-    return res.status.json({
+    return res.status(201).json({
       title: newMedia.title,
       format: newMedia.format,
       favoriteCharacters: newMedia.favoriteCharacters,

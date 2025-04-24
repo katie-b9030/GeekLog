@@ -118,3 +118,5 @@ const init = () => {
   const root = createRoot(document.getElementById("app"));
   root.render(<App />);
 };
+
+window.onload = init;
