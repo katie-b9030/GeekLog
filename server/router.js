@@ -36,6 +36,7 @@ const router = (app) => {
     mid.requiresLogout,
     controllers.Account.loginPage,
   );
+  app.get('/notFound', controllers.Log.notFoundPage);
 };
 
 module.exports = router;

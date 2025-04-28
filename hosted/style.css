@@ -1,0 +1,96 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+nav,
+footer {
+  display: flex;
+  background-color: #982345;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  height: 50px;
+  align-items: center;
+}
+
+nav div,
+footer div {
+  padding-left: 25px;
+}
+
+nav {
+  height: 50px;
+}
+
+.userGreeting * {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.navlink a,
+.navlink a:link,
+.navlink a:visited,
+.navlink a:hover,
+.navlink a:active {
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  transition: color 0.4s ease;
+}
+
+.navlink a:hover {
+  transition: color 0.8s ease;
+  color: #fe89ab;
+}
+
+footer {
+  height: 30px;
+  justify-content: center;
+}
+
+#app {
+  min-height: 100%;
+}
+
+#content > form {
+  align-items: center;
+  justify-content: center;
+}
+
+#content > form > input {
+  margin: 10px;
+}
+
+#logout {
+  float: right;
+  padding-right: 25px;
+}
+
+.pageUtils button .notPrem {
+  background-color: gold;
+  color: black;
+}
+.pageUtils button .prem {
+  background-color: white;
+  color: black;
+}
+
+.setRating {
+  color: gold;
+}

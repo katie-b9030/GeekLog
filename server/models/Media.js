@@ -16,11 +16,15 @@ const MediaSchema = new mongoose.Schema({
   },
   favoriteCharacters: {
     type: String,
-    required: false,
+    default: 'empty',
   },
   comments: {
     type: String,
-    required: false,
+    default: 'empty',
+  },
+  rating: {
+    type: Number,
+    default: 0,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -34,6 +38,7 @@ MediaSchema.statics.toApi = (doc) => ({
   format: doc.format,
   favoriteCharacters: doc.favoriteCharacters,
   comments: doc.comments,
+  rating: doc.rating,
 });
 
 const MediaModel = mongoose.model('Media', MediaSchema);

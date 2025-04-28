@@ -2,9 +2,11 @@ const models = require('../models');
 
 const { Media } = models;
 
-const makerPage = (req, res) => res.render('app', { name: req.session.account.name });
+const makerPage = (req, res) => res.render('app', { page: 'maker', name: req.session.account.name });
 
-const logPage = (req, res) => res.render('app', { name: req.session.account.name });
+const logPage = (req, res) => res.render('app', { page: 'log', name: req.session.account.name });
+
+const notFoundPage = (req, res) => res.render('app');
 
 const makeMedia = async (req, res) => {
   if (!req.body.title || !req.body.format) {
@@ -16,10 +18,9 @@ const makeMedia = async (req, res) => {
   const mediaData = {
     title: req.body.title,
     format: req.body.format,
-    favoriteCharacters: req.body.favoriteCharacters
-      ? req.body.favoriteCharacters
-      : 'empty',
-    comments: req.body.comments ? req.body.comments : 'empty',
+    favoriteCharacters: req.body.favoriteCharacters,
+    comments: req.body.comments,
+    rating: req.body.rating,
     owner: req.session.account._id,
   };
 
@@ -31,6 +32,7 @@ const makeMedia = async (req, res) => {
       format: newMedia.format,
       favoriteCharacters: newMedia.favoriteCharacters,
       comments: newMedia.comments,
+      rating: newMedia.rating,
     });
   } catch (err) {
     console.log(err);
@@ -58,6 +60,7 @@ const getMedia = async (req, res) => {
 module.exports = {
   makerPage,
   logPage,
+  notFoundPage,
   makeMedia,
   getMedia,
 };

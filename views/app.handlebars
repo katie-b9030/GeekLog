@@ -5,30 +5,52 @@
     <!-- <a target="_blank" href="https://icons8.com/icon/1jq1ghRqqaDy/story-book">Story Book</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
     <link rel="shortcut icon" href="/assets/img/favicon.png" />
     <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/b75678d434.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav>
       <!-- <a href="/login"></a> -->
-      <div class="navlink"><a href="/maker">Create Media</a></div>
-      <div class="navlink"><a href="/log">View Log</a></div>
-      <div class="userGreeting navlink">
-        Hello there,
-        <span id="name">{{name}}</span>!
+      <div id="pageNav">
+        <div class="navlink"><a href="/maker">Create Media</a></div>
+        <div class="navlink"><a href="/log">View Log</a></div>
+        <div class="userGreeting navlink">
+          Hello there,
+          <span id="name">{{name}}</span>!
+        </div>
       </div>
-      <div class="navlink"><a href="/logout">Log Out</a></div>
+      <div id="pageUtils">
+        <button class="notPrem">Go Premium
+          <i class="fa-solid fa-crown"></i></button>
+        <div class="navlink"><a href="/logout">Log Out</a></div>
+      </div>
     </nav>
+    <main>
+      <!-- Used ChatGPT to add data-page attribute to make it easier to switch between my log and maker pages -->
+      <section id="app" data-page="{{page}}">
 
-    <section id="app">
+      </section>
 
-    </section>
-
-    <div id="logMessage" class="hidden">
-      <h3><span id="errorMessage"></span></h3>
-    </div>
+      <div id="logMessage" class="hidden">
+        <h3><span id="errorMessage"></span></h3>
+      </div>
+    </main>
+    <footer>
+      <div class="navlink"><a href="../hosted/docs/documentation.txt">View my
+          Documentation</a></div>
+      <div class="navlink"><a
+          target="_blank"
+          href="https://icons8.com/icon/1jq1ghRqqaDy/story-book"
+        >Story Book</a>
+        icon by
+        <a
+          class="navlink"
+          target="_blank"
+          href="https://icons8.com"
+        >Icons8</a></div>
+    </footer>
     <script src="/assets/appBundle.js"></script>
   </body>
-  <footer>
-    <div><a href="../hosted/docs/documentation.txt">View my Documentation</a></div>
-    <div><a target="_blank" href="https://icons8.com/icon/1jq1ghRqqaDy/story-book">Story Book</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></div>
-  </footer>
 </html>

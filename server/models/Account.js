@@ -37,6 +37,10 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isPremium: {
+    type: Boolean,
+    default: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -47,6 +51,7 @@ const AccountSchema = new mongoose.Schema({
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   name: doc.name,
+  isPremium: doc.isPremium,
   _id: doc._id,
 });
 
