@@ -20,6 +20,7 @@ main {
 nav,
 footer {
   display: flex;
+  flex-direction: row;
   background-color: #982345;
   width: 100%;
   color: white;
@@ -82,15 +83,17 @@ footer {
   padding-right: 25px;
 }
 
-.pageUtils button .notPrem {
+.pageUtils button.notPrem {
   background-color: gold;
   color: black;
 }
-.pageUtils button .prem {
+.pageUtils button.prem {
   background-color: white;
   color: black;
 }
 
 .setRating {
   color: gold;
+  display: flex;
+  flex-direction: row;
 }

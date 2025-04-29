@@ -33,7 +33,27 @@ redisClient.on('error', (err) => console.log('Redis Client Error', err));
 redisClient.connect().then(() => {
   const app = express();
 
-  app.use(helmet());
+  // Used chat GPT to generate CSP so I could use fontAwesome Icons
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: [
+            "'self'",
+            'https://kit.fontawesome.com',
+            'https://ka-f.fontawesome.com',
+          ],
+          styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+          imgSrc: ["'self'", 'https:', 'data:'],
+          fontSrc: ["'self'", 'https:', 'data:'],
+          connectSrc: ["'self'", 'https://ka-f.fontawesome.com'],
+          objectSrc: ["'none'"],
+          upgradeInsecureRequests: [],
+        },
+      },
+    }),
+  );
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
   app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
   app.use(compression());

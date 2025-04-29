@@ -3,6 +3,9 @@ const React = require("react");
 const { useState, useEffect } = React;
 const { createRoot } = require("react-dom/client");
 
+let isPremium =
+  document.querySelector("#premium")?.classList.contains("prem") || false;
+
 // LOG SECTION
 const MediaList = (props) => {
   const [media, setMedia] = useState([props.media]);
@@ -17,73 +20,31 @@ const MediaList = (props) => {
     loadMediaFromServer();
   }, [props.reloadMedia]);
 
-  const movies = media.map((piece) => piece.format === "movie");
-  const shows = media.map((piece) => piece.format === "show");
-  const books = media.map((piece) => piece.format === "book");
+  const movies = media.filter((piece) => piece.format === "movie");
+  const shows = media.filter((piece) => piece.format === "show");
+  const books = media.filter((piece) => piece.format === "book");
 
-  const RatingSpan = (rating) => {
+  const RatingSpan = ({ rating }) => {
     if (isPremium) {
-      if (rating === 5) {
-        return (
-          <span>
-            <i id="star1" class="fa-solid fa-star"></i>
-            <i id="star2" class="fa-solid fa-star"></i>
-            <i id="star3" class="fa-solid fa-star"></i>
-            <i id="star4" class="fa-solid fa-star"></i>
-            <i id="star5" class="fa-solid fa-star"></i>
-          </span>
-        );
-      } else if (rating === 4) {
-        return (
-          <span>
-            <i id="star1" class="fa-solid fa-star"></i>
-            <i id="star2" class="fa-solid fa-star"></i>
-            <i id="star3" class="fa-solid fa-star"></i>
-            <i id="star4" class="fa-solid fa-star"></i>
-            <i id="star5" class="fa-regular fa-star"></i>
-          </span>
-        );
-      } else if (rating === 3) {
-        return (
-          <span>
-            <i id="star1" class="fa-solid fa-star"></i>
-            <i id="star2" class="fa-solid fa-star"></i>
-            <i id="star3" class="fa-solid fa-star"></i>
-            <i id="star4" class="fa-regular fa-star"></i>
-            <i id="star5" class="fa-regular fa-star"></i>
-          </span>
-        );
-      } else if (rating === 2) {
-        return (
-          <span>
-            <i id="star1" class="fa-solid fa-star"></i>
-            <i id="star2" class="fa-solid fa-star"></i>
-            <i id="star3" class="fa-regular fa-star"></i>
-            <i id="star4" class="fa-regular fa-star"></i>
-            <i id="star5" class="fa-regular fa-star"></i>
-          </span>
-        );
-      } else if (rating === 1) {
-        return (
-          <span>
-            <i id="star1" class="fa-solid fa-star"></i>
-            <i id="star2" class="fa-regular fa-star"></i>
-            <i id="star3" class="fa-regular fa-star"></i>
-            <i id="star4" class="fa-regular fa-star"></i>
-            <i id="star5" class="fa-regular fa-star"></i>
-          </span>
-        );
-      } else {
-        return (
-          <span>
-            <i id="star1" class="fa-regular fa-star"></i>
-            <i id="star2" class="fa-regular fa-star"></i>
-            <i id="star3" class="fa-regular fa-star"></i>
-            <i id="star4" class="fa-regular fa-star"></i>
-            <i id="star5" class="fa-regular fa-star"></i>
-          </span>
-        );
-      }
+      return (
+        <span>
+          <i
+            class={1 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+          <i
+            class={2 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+          <i
+            class={3 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+          <i
+            class={4 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+          <i
+            class={5 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          ></i>
+        </span>
+      );
     }
     return;
   };
@@ -96,6 +57,7 @@ const MediaList = (props) => {
     const movieNodes = movies.map((movie) => {
       return (
         <div key={movie.id} className="movie">
+          <i class="fa-solid fa-film"></i>
           <h3 className="title">{movie.title}</h3>
           <p className="movieFormat">Movie</p>
           <p className="favoriteCharacters">
@@ -118,6 +80,7 @@ const MediaList = (props) => {
     const showNodes = shows.map((show) => {
       return (
         <div key={show.id} className="show">
+          <i class="fa-solid fa-tv"></i>
           <h3 className="title">{show.title}</h3>
           <p className="showFormat">TV Series</p>
           <p className="favoriteCharacters">
@@ -140,6 +103,7 @@ const MediaList = (props) => {
     const bookNodes = books.map((book) => {
       return (
         <div key={book.id} className="book">
+          <i class="fa-solid fa-book"></i>
           <h3 className="title">{book.title}</h3>
           <p className="bookFormat">Book</p>
           <p className="favoriteCharacters">
@@ -180,14 +144,15 @@ const MediaList = (props) => {
 };
 
 // MAKER SECTION
-const handleMedia = (e, onMediaAdded) => {
+const handleMedia = (e, onMediaAdded, mediaRating) => {
   e.preventDefault();
   helper.hideError();
 
   const title = e.target.querySelector("#mediaTitle").value;
   const format = e.target.querySelector("#mediaFormat").value;
   const favoriteCharacters = e.target.querySelector("#mediaCharacters").value;
-  const comments = e.target.querySelector("#mediaComments");
+  const comments = e.target.querySelector("#mediaComments").value;
+  const rating = mediaRating;
 
   if (!title || !format) {
     helper.handleError("Title and format are required!");
@@ -196,40 +161,45 @@ const handleMedia = (e, onMediaAdded) => {
 
   helper.sendPost(
     e.target.action,
-    { title, format, favoriteCharacters, comments },
+    { title, format, favoriteCharacters, comments, rating },
     onMediaAdded
   );
   return false;
 };
 
-const RatingSpan = (props) => {
+const RatingSelect = (props) => {
   if (isPremium) {
     return (
       <span class="setRating">
         <i
-          id="star1"
-          class="fa-regular fa-star"
-          onClick={(e) => RateMedia(1)}
+          class={1 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          onClick={(e) => {
+            props.setRating(1);
+          }}
         ></i>
         <i
-          id="star2"
-          class="fa-regular fa-star"
-          onClick={(e) => RateMedia(2)}
+          class={2 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          onClick={(e) => {
+            props.setRating(2);
+          }}
         ></i>
         <i
-          id="star3"
-          class="fa-regular fa-star"
-          onClick={(e) => RateMedia(3)}
+          class={3 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          onClick={(e) => {
+            props.setRating(3);
+          }}
         ></i>
         <i
-          id="star4"
-          class="fa-regular fa-star"
-          onClick={(e) => RateMedia(4)}
+          class={4 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          onClick={(e) => {
+            props.setRating(4);
+          }}
         ></i>
         <i
-          id="star5"
-          class="fa-regular fa-star"
-          onClick={(e) => RateMedia(5)}
+          class={5 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+          onClick={(e) => {
+            props.setRating(5);
+          }}
         ></i>
       </span>
     );
@@ -237,34 +207,13 @@ const RatingSpan = (props) => {
   return;
 };
 
-const RateMedia = (rating) => {
-  if (rating > 0) {
-    document.querySelector("#star1").classList.remove("fa-regular");
-    document.querySelector("#star1").classList.add("fa-solid");
-  }
-  if (rating > 1) {
-    document.querySelector("#star2").classList.remove("fa-regular");
-    document.querySelector("#star2").classList.add("fa-solid");
-  }
-  if (rating > 2) {
-    document.querySelector("#star3").classList.remove("fa-regular");
-    document.querySelector("#star3").classList.add("fa-solid");
-  }
-  if (rating > 3) {
-    document.querySelector("#star4").classList.remove("fa-regular");
-    document.querySelector("#star4").classList.add("fa-solid");
-  }
-  if (rating > 4) {
-    document.querySelector("#star5").classList.remove("fa-regular");
-    document.querySelector("#star5").classList.add("fa-solid");
-  }
-};
-
 const MediaForm = (props) => {
+  const [mediaRating, setMediaRating] = useState(0);
+
   return (
     <form
       id="mediaForm"
-      onSubmit={(e) => handleMedia(e, props.triggerReload)}
+      onSubmit={(e) => handleMedia(e, props.triggerReload, mediaRating)}
       name="mediaForm"
       action="/maker"
       method="POST"
@@ -298,14 +247,34 @@ const MediaForm = (props) => {
         name="comments"
         placeholder="Comments"
       />
-      <RatingSpan />
-      <input className="makeMediaSubmit" type="submit" value="Add Media" />
+      <RatingSelect rating={mediaRating} setRating={setMediaRating} />
+      <input className="makeMediaSubmit" type="submit" value="Create Media" />
     </form>
   );
 };
 
 const App = () => {
   const [reloadMedia, setReloadMedia] = useState(false);
+  // used ChatGPT to assist with Premium dynamic changing logic
+
+  useEffect(() => {
+    const premButton = document.querySelector("#premium");
+    const togglePremium = () => {
+      isPremium = !isPremium;
+      if (isPremium) {
+        premButton.classList.remove("notPrem");
+        premButton.classList.add("prem");
+        premButton.innerHTML =
+          "End Subscription <i class='fa-solid fa-xmark'></i>";
+      } else {
+        premButton.classList.remove("prem");
+        premButton.classList.add("notPrem");
+        premButton.innerHTML = "Go Premium <i class='fa-solid fa-crown'></i>";
+      }
+    };
+
+    premButton.addEventListener("click", togglePremium);
+  });
 
   if (document.getElementById("app").dataset.page === "maker") {
     return (
