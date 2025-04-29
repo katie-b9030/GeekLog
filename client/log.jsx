@@ -3,9 +3,6 @@ const React = require("react");
 const { useState, useEffect } = React;
 const { createRoot } = require("react-dom/client");
 
-let isPremium =
-  document.querySelector("#premium")?.classList.contains("prem") || false;
-
 // LOG SECTION
 const MediaList = (props) => {
   const [media, setMedia] = useState([props.media]);
@@ -25,7 +22,7 @@ const MediaList = (props) => {
   const books = media.filter((piece) => piece.format === "book");
 
   const RatingSpan = ({ rating }) => {
-    if (isPremium) {
+    if (props.isPremium) {
       return (
         <span>
           <i
@@ -168,7 +165,7 @@ const handleMedia = (e, onMediaAdded, mediaRating) => {
 };
 
 const RatingSelect = (props) => {
-  if (isPremium) {
+  if (props.isPremium) {
     return (
       <span class="setRating">
         <i
@@ -247,7 +244,11 @@ const MediaForm = (props) => {
         name="comments"
         placeholder="Comments"
       />
-      <RatingSelect rating={mediaRating} setRating={setMediaRating} />
+      <RatingSelect
+        isPremium={props.isPremium}
+        rating={mediaRating}
+        setRating={setMediaRating}
+      />
       <input className="makeMediaSubmit" type="submit" value="Create Media" />
     </form>
   );
@@ -256,31 +257,38 @@ const MediaForm = (props) => {
 const App = () => {
   const [reloadMedia, setReloadMedia] = useState(false);
   // used ChatGPT to assist with Premium dynamic changing logic
+  const [isPremium, setIsPremium] = useState(
+    document.querySelector("#premium")?.classList.contains("prem") || false
+  );
 
   useEffect(() => {
     const premButton = document.querySelector("#premium");
     const togglePremium = () => {
-      isPremium = !isPremium;
-      if (isPremium) {
-        premButton.classList.remove("notPrem");
-        premButton.classList.add("prem");
-        premButton.innerHTML =
-          "End Subscription <i class='fa-solid fa-xmark'></i>";
-      } else {
-        premButton.classList.remove("prem");
-        premButton.classList.add("notPrem");
-        premButton.innerHTML = "Go Premium <i class='fa-solid fa-crown'></i>";
-      }
+      setIsPremium((prev) => {
+        newStatus = !prev;
+        if (newStatus) {
+          premButton.classList.remove("notPrem");
+          premButton.classList.add("prem");
+          premButton.innerHTML =
+            "End Subscription <i class='fa-solid fa-xmark'></i>";
+        } else {
+          premButton.classList.remove("prem");
+          premButton.classList.add("notPrem");
+          premButton.innerHTML = "Go Premium <i class='fa-solid fa-crown'></i>";
+        }
+        return newStatus;
+      });
     };
 
     premButton.addEventListener("click", togglePremium);
-  });
+    return () => premButton.removeEventListener("click", togglePremium);
+  }, []);
 
   if (document.getElementById("app").dataset.page === "maker") {
     return (
       <div>
         <div id="makeMedia">
-          <MediaForm triggerReload={() => setReloadMedia(!reloadMedia)} />
+          <MediaForm isPremium={isPremium} triggerReload={() => setReloadMedia(!reloadMedia)} />
         </div>
       </div>
     );
@@ -288,7 +296,8 @@ const App = () => {
   return (
     <div>
       <div id="showLog">
-        <MediaList media={[]} reloadMedia={reloadMedia} />;
+        <MediaList isPremium={isPremium} media={[]} reloadMedia={reloadMedia} />
+        ;
       </div>
     </div>
   );
