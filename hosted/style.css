@@ -65,7 +65,6 @@ nav {
 .navlink a:hover,
 .navlink a:active {
   color: white;
-  text-decoration: none;
   padding: 5px;
   transition: color 0.4s ease;
 }
@@ -128,15 +127,37 @@ footer {
 .movie,
 .show,
 .book {
-  border: 2px solid #982345;
   border-radius: 10px;
   height: 150px;
-  background-color: #fef9ab;
   margin: 5px;
   display: flex;
   flex-direction: row;
   padding: 20px;
   width: 550px;
+}
+
+.movie {
+  border: 5px solid #11570e;
+  background-color: #c4feab;
+}
+.movie-format {
+  color: #11570e;
+}
+
+.show {
+  border: 5px solid #0e1e57;
+  background-color: #abe8fe;
+}
+.show-format {
+  color: #0e1e57;
+}
+
+.book {
+  border: 5px solid #3b0e57;
+  background-color: #e8c0ff;
+}
+.book-format {
+  color: #3b0e57;
 }
 
 div.content {
@@ -179,4 +200,9 @@ form select {
 form label {
   margin-top: 10px;
   font-size: 1.25rem;
+}
+
+input[type="submit"],
+button {
+  border: none;
 }

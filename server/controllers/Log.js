@@ -8,7 +8,8 @@ const makerPage = (req, res) =>
 const logPage = (req, res) =>
   res.render("app", { page: "log", name: req.session.account.name });
 
-const notFoundPage = (req, res) => res.render("app", { page: "notFound" });
+const notFoundPage = (req, res) =>
+  res.status(404).render("app", { page: "notFound" });
 
 const makeMedia = async (req, res) => {
   if (!req.body.title || !req.body.format) {
