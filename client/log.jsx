@@ -65,12 +65,16 @@ const MediaList = (props) => {
       return (
         <div key={movie.id} className="movie">
           <i class="fa-solid fa-film format movie-format"></i>
-          <h3 className="title">{movie.title}</h3>
-          <p className="favoriteCharacters">
-            Favorite Characters: {movie.favoriteCharacters}
-          </p>
-          <p className="comments">Comments: {movie.comments}</p>
-          <RatingSpan rating={movie.rating} isPremium={props.isPremium} />
+          <div class="content">
+            <div class="mediaHead">
+              <h3 className="title">{movie.title}</h3>
+              <RatingSpan rating={movie.rating} isPremium={props.isPremium} />
+            </div>
+            <p className="favoriteCharacters">
+              Favorite Characters: {movie.favoriteCharacters}
+            </p>
+            <p className="comments">Comments: {movie.comments}</p>
+          </div>
         </div>
       );
     });
@@ -87,12 +91,16 @@ const MediaList = (props) => {
       return (
         <div key={show.id} className="show">
           <i class="fa-solid fa-tv format show-format"></i>
-          <h3 className="title">{show.title}</h3>
-          <p className="favoriteCharacters">
-            Favorite Characters: {show.favoriteCharacters}
-          </p>
-          <p className="comments">Comments: {show.comments}</p>
-          <RatingSpan rating={show.rating} isPremium={props.isPremium} />
+          <div class="content">
+            <div class="mediaHead">
+              <h3 className="title">{show.title}</h3>
+              <RatingSpan rating={show.rating} isPremium={props.isPremium} />
+            </div>
+            <p className="favoriteCharacters">
+              Favorite Characters: {show.favoriteCharacters}
+            </p>
+            <p className="comments">Comments: {show.comments}</p>
+          </div>
         </div>
       );
     });
@@ -108,13 +116,17 @@ const MediaList = (props) => {
     const bookNodes = books.map((book) => {
       return (
         <div key={book.id} className="book">
-          <i class="fa-solid fa-book format show-format"></i>
-          <h3 className="title">{book.title}</h3>
-          <p className="favoriteCharacters">
-            Favorite Characters: {book.favoriteCharacters}
-          </p>
-          <p className="comments">Comments: {book.comments}</p>
-          <RatingSpan rating={book.rating} isPremium={props.isPremium} />
+          <i class="fa-solid fa-book format book-format"></i>
+          <div class="content">
+            <div class="mediaHead">
+              <h3 className="title">{book.title}</h3>
+              <RatingSpan rating={book.rating} isPremium={props.isPremium} />
+            </div>
+            <p className="favoriteCharacters">
+              Favorite Characters: {book.favoriteCharacters}
+            </p>
+            <p className="comments">Comments: {book.comments}</p>
+          </div>
         </div>
       );
     });
@@ -163,11 +175,14 @@ const handleMedia = (e, onMediaAdded, mediaRating) => {
     return false;
   }
 
+  helper.handleSubmission();
+
   helper.sendPost(
     e.target.action,
     { title, format, favoriteCharacters, comments, rating },
     onMediaAdded
   );
+
   return false;
 };
 

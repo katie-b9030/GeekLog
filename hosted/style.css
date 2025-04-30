@@ -14,7 +14,10 @@ body {
 }
 
 main {
-  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 nav,
@@ -26,7 +29,6 @@ footer {
   color: white;
   padding: 10px;
   margin: 0;
-  height: 50px;
   align-items: center;
 }
 
@@ -36,13 +38,20 @@ footer div {
 }
 
 nav {
-  height: 50px;
+  height: 40px;
+  position: absolute;
+  top: 0;
 }
 
-.pageNav,
-.pageUtils {
+#pageNav,
+#pageUtils {
   display: flex;
   flex-direction: row;
+}
+
+#pageUtils {
+  margin-right: 80px;
+  margin-left: auto;
 }
 
 .userGreeting * {
@@ -69,10 +78,8 @@ nav {
 footer {
   height: 30px;
   justify-content: center;
-}
-
-#app {
-  min-height: 100%;
+  position: fixed;
+  bottom: 0;
 }
 
 #content > form {
@@ -89,18 +96,87 @@ footer {
   padding-right: 25px;
 }
 
-.pageUtils button.notPrem {
+#pageUtils button.notPrem {
   background-color: gold;
   color: black;
+  border-radius: 5px;
 }
-.pageUtils button.prem {
+#pageUtils button.prem {
   background-color: white;
   color: black;
+  border-radius: 5px;
 }
 
-.setRating,
-.rating {
+.setRating {
   color: gold;
   display: flex;
   flex-direction: row;
+  font-size: 1.25rem;
+  padding-top: 10px;
+}
+
+.movie-format,
+.show-format,
+.book-format {
+  font-size: 3rem;
+  align-self: center;
+  justify-content: center;
+  padding: 20px;
+  width: 70px;
+}
+
+.movie,
+.show,
+.book {
+  border: 2px solid #982345;
+  border-radius: 10px;
+  height: 150px;
+  background-color: #fef9ab;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  width: 550px;
+}
+
+div.content {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+div.mediaHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comments,
+.favorite-characters {
+  text-wrap: wrap;
+}
+
+#app,
+section#content {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+form input,
+form select {
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+form label {
+  margin-top: 10px;
+  font-size: 1.25rem;
 }

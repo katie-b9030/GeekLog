@@ -31,15 +31,22 @@ const MediaSchema = new mongoose.Schema({
     required: true,
     ref: 'Account',
   },
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-MediaSchema.statics.toApi = (doc) => ({
+MediaSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   format: doc.format,
   favoriteCharacters: doc.favoriteCharacters,
   comments: doc.comments,
   rating: doc.rating,
 });
+
+// // asked ChatGPT for assistance preventing duplicates
+// MediaSchema.index({ title: 1, format: 1, owner: 1 }, { unique: true });
 
 const MediaModel = mongoose.model('Media', MediaSchema);
 module.exports = MediaModel;

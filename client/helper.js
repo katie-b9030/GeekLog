@@ -3,8 +3,18 @@
    end in an error.
 */
 const handleError = (message) => {
-  document.getElementById("errorMessage").textContent = message;
-  document.getElementById("logMessage").classList.remove("hidden");
+  document.getElementById("error").textContent = message;
+  document.getElementById("errorMessage").classList.remove("hidden");
+  document.getElementById("success").textContent = "";
+  document.getElementById("successMessage").classList.add("hidden");
+};
+
+const handleSubmission = () => {
+  document.getElementById("success").textContent =
+    "Media Created Successfully!";
+  document.getElementById("successMessage").classList.remove("hidden");
+  document.getElementById("error").textContent = "";
+  document.getElementById("errorMessage").classList.add("hidden");
 };
 
 /* Sends post requests to the server using fetch. Will look for various
@@ -20,7 +30,7 @@ const sendPost = async (url, data, handler) => {
   });
 
   const result = await response.json();
-  document.getElementById("logMessage").classList.add("hidden");
+  document.getElementById("errorMessage").classList.add("hidden");
 
   if (result.redirect) {
     window.location = result.redirect;
@@ -36,11 +46,12 @@ const sendPost = async (url, data, handler) => {
 };
 
 const hideError = () => {
-  document.getElementById("logMessage").classList.add("hidden");
+  document.getElementById("errorMessage").classList.add("hidden");
 };
 
 module.exports = {
   handleError,
+  handleSubmission,
   sendPost,
   hideError,
 };
