@@ -39,6 +39,12 @@ nav {
   height: 50px;
 }
 
+.pageNav,
+.pageUtils {
+  display: flex;
+  flex-direction: row;
+}
+
 .userGreeting * {
   margin: 0px !important;
   padding: 0px !important;
@@ -92,7 +98,8 @@ footer {
   color: black;
 }
 
-.setRating {
+.setRating,
+.rating {
   color: gold;
   display: flex;
   flex-direction: row;

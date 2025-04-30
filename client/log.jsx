@@ -5,7 +5,7 @@ const { createRoot } = require("react-dom/client");
 
 // LOG SECTION
 const MediaList = (props) => {
-  const [media, setMedia] = useState([props.media]);
+  const [media, setMedia] = useState([]);
 
   const loadMediaFromServer = async () => {
     const response = await fetch("/getMedia");
@@ -21,24 +21,34 @@ const MediaList = (props) => {
   const shows = media.filter((piece) => piece.format === "show");
   const books = media.filter((piece) => piece.format === "book");
 
-  const RatingSpan = ({ rating }) => {
+  const RatingSpan = (props) => {
     if (props.isPremium) {
       return (
-        <span>
+        <span class="rating">
           <i
-            class={1 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+            class={
+              1 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"
+            }
           ></i>
           <i
-            class={2 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+            class={
+              2 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"
+            }
           ></i>
           <i
-            class={3 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+            class={
+              3 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"
+            }
           ></i>
           <i
-            class={4 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+            class={
+              4 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"
+            }
           ></i>
           <i
-            class={5 <= rating ? "fa-solid fa-star" : "fa-regular fa-star"}
+            class={
+              5 <= props.rating ? "fa-solid fa-star" : "fa-regular fa-star"
+            }
           ></i>
         </span>
       );
@@ -54,14 +64,13 @@ const MediaList = (props) => {
     const movieNodes = movies.map((movie) => {
       return (
         <div key={movie.id} className="movie">
-          <i class="fa-solid fa-film"></i>
+          <i class="fa-solid fa-film format movie-format"></i>
           <h3 className="title">{movie.title}</h3>
-          <p className="movieFormat">Movie</p>
           <p className="favoriteCharacters">
             Favorite Characters: {movie.favoriteCharacters}
           </p>
           <p className="comments">Comments: {movie.comments}</p>
-          <RatingSpan rating={movie.rating} />
+          <RatingSpan rating={movie.rating} isPremium={props.isPremium} />
         </div>
       );
     });
@@ -77,14 +86,13 @@ const MediaList = (props) => {
     const showNodes = shows.map((show) => {
       return (
         <div key={show.id} className="show">
-          <i class="fa-solid fa-tv"></i>
+          <i class="fa-solid fa-tv format show-format"></i>
           <h3 className="title">{show.title}</h3>
-          <p className="showFormat">TV Series</p>
           <p className="favoriteCharacters">
             Favorite Characters: {show.favoriteCharacters}
           </p>
           <p className="comments">Comments: {show.comments}</p>
-          <RatingSpan rating={show.rating} />
+          <RatingSpan rating={show.rating} isPremium={props.isPremium} />
         </div>
       );
     });
@@ -100,14 +108,13 @@ const MediaList = (props) => {
     const bookNodes = books.map((book) => {
       return (
         <div key={book.id} className="book">
-          <i class="fa-solid fa-book"></i>
+          <i class="fa-solid fa-book format show-format"></i>
           <h3 className="title">{book.title}</h3>
-          <p className="bookFormat">Book</p>
           <p className="favoriteCharacters">
             Favorite Characters: {book.favoriteCharacters}
           </p>
           <p className="comments">Comments: {book.comments}</p>
-          <RatingSpan rating={book.rating} />
+          <RatingSpan rating={book.rating} isPremium={props.isPremium} />
         </div>
       );
     });
@@ -288,7 +295,10 @@ const App = () => {
     return (
       <div>
         <div id="makeMedia">
-          <MediaForm isPremium={isPremium} triggerReload={() => setReloadMedia(!reloadMedia)} />
+          <MediaForm
+            isPremium={isPremium}
+            triggerReload={() => setReloadMedia(!reloadMedia)}
+          />
         </div>
       </div>
     );
@@ -297,7 +307,6 @@ const App = () => {
     <div>
       <div id="showLog">
         <MediaList isPremium={isPremium} media={[]} reloadMedia={reloadMedia} />
-        ;
       </div>
     </div>
   );
