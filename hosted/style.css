@@ -15,6 +15,7 @@ body {
 
 main {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   margin-top: 80px;
   margin-bottom: 80px;
@@ -81,13 +82,9 @@ footer {
   bottom: 0;
 }
 
-#content > form {
+#content {
   align-items: center;
   justify-content: center;
-}
-
-#content > form > input {
-  margin: 10px;
 }
 
 #logout {
