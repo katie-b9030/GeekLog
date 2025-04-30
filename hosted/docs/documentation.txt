@@ -1,39 +1,72 @@
-1.  What is the intended purpose of your application?
-GeekLog is meant to let people keep track of the media they watch, as well as their favorite characters and thoughts about that piece. As many of us have media that we like to keep track of, I thought it might be useful to create a tool to let us keep track of our favorites and remember why we love them so much.
+1.  What is the purpose of your application? What does it do
+GeekLog lets people keep track of the media they watch, as well as their favorite characters and thoughts about that piece. As many of us have media that we like to keep track of, I thought it might be useful to create a tool to let us keep track of our favorites and remember why we love them so much.
 
-2.  What work has been completed for this milestone?
-I have implemented my new model and controller and most of the functionality for the app. I have a way for a user to add a title and format of the media, as well as optional favorite characters and comments about the media.
+2.  How are you using React?
+I'm using React to dynamically switch between my login and signup forms, and to dynamically populate each of the media pieces in my log. I also use it to switch between my media log and my media form, as well as update the information displayed based on whether the user is currently a premium subscriber or not.
 
-3.  What work is left, and how do you plan to complete it?
-My crucial piece is to make sure my maker page shows up to create all my styling and implement my profit model. If I have time, I also want to add the ability to update an entry and potentially add the ability to mark something as your current favorite.
+    a)  What components do you have?
+    I have created a log that dynamically populates sections based on whether media of a certain type has been created yet. I also have a react component for all of my rating items based on whether the user is premium. All of my forms are dynamic react components as well.
 
-    a)  What does your timeline/roadmap look like to finish on time?
-    My goal is to implement my styles by Thursday, then try to add the profit model by Sunday, and then try to get the update media and/or favorite functionality done by Tuesday.
+3.  What data are you storing in MongoDB?
+I'm storing account data and media data in MongoDB, including, names, usernames, hashed passwords, media titles, media types, optional favorite characters, optional comments, and optional ratings (set to 0 if a user is not premium).
 
-4.  How are you using React?
-I'm using React to dynamically switch between my login and signup forms, and to dynamically populate each of the media pieces in my log. Also I hope to use it to switch between the create media and update media forms. I might use it to dynamically update the favorites on a side panel of the log page as well.
+4.  What went right in the development of this project?
+My models were pretty straightforward and a lot of my styling was really easy to implement. My react components and forms were also easy to create, although getting them working the way I wanted is a different story.
 
-    a)  What components have you made?
-    I have created a dynamic log that dynamically populates sections based on whether media of a certain type has been created yet.
+5.  What went wrong in the development of this project?
+I had several issues with trying to make dynamic updates that I had to turn to google and ChatGPT for assistance in fixing. For example, trying to track whether a user was premium and whether to show the ratings was really difficult to get implemented properly.
 
-    b)  What components do you still plan to add?
-    I hope to add dynamic favorites and update the maker pages to change dynamically with new fields when the premium button is clicked.
+6.  What did you learn while developing this project?
+I learned that sometimes you need to just step away and come back to your project for things to make sense, especially if you're working late. I also learned that sometimes you can't do everything you wanted to, at least not well, within your time constraints, and you have to be able to make your peace with a project that isn't "finished" the way you want it to be.
 
-5.  What data are you storing in MongoDB?
-I'm storing account data and media data in MongoDB, including, names, usernames, hashed passwords, media titles, media types, optional favorite characters, and optional comments.
+7.  If you were to continue, what would you do to improve your application?
+I would definitely make better looking styles, I'd try to add other functionality like updating pieces of media and marking one piece from each type as your favorite. I would also add functionality to track your favorite quotes.
 
-    a)  What data do you still need to store?
-    I will eventually probably need to store a rating, quotes, and whether it's a favorite if I'm able to implement everything I hope to.
+8.  If you went above and beyond, how did you do so?
+I implemented a dynamic profit model enabling rating features when you went premium. I don't think I really did "above and beyond" other than that.
 
-6.  What is your profit model?
-My hope is to create a premium button that allows users to add a rating and quotes to a piece of media.
+9.  If you used any borrowed code or code fragments, where did you get them from? What do the code fragments do? Where are they in your code?
+I borrowed a few pieces of code from ChatGPT, mostly to be able to dynamically update my forms and media pieces based on whether the user was premium. Each borrowed line/section of code has a comment above it noting that it was from ChatGPT. I also have the borrowed code fragments I have is the base from DomoMaker E, including all of the Account features, login.jsx, and the base functionality of several other functions.
 
-    b)  Have you implemented it yet?
-    No, I have not started to implement it.
 
-7.  Do you have a plan for going above and beyond? If so, what is it?
-I do not currently have a plan for my above and beyond.
+ROUTES:
 
-8.  If you used any borrowed code or code fragments, where did you get them from?
-What do the code fragments do? Where are they in your code?
-So far, the borrowed code fragments I have is the base from DomoMaker E, including all of the Account features, login.jsx, and the base functionality of several other functions.
+URL: /getMedia
+Supported Methods: GET
+Middleware: Requires Login
+Description: retreives media items
+
+URL: /log
+Supported Methods: GET
+Middleware: Requires Login
+Description: retreives the log page from the controller
+
+URL: /login
+Supported Methods: GET. POST
+Middleware: Requires Secure, Requires Logout
+Description: returns login page and handles user attempts to log in to the app
+
+URL: /signup
+Supported Methods: POST
+Middleware: Requires Secure, Requires Logout
+Description: retreives signup page and handles user attempts to create an account for the app
+
+URL: /logout
+Supported Methods: GET
+Middleware: Requires Login
+Description: logs a user out of the app and returns login page
+
+URL: /maker
+Supported Methods: GET, POST
+Middleware: Requires Login
+Description: retrieves maker page and handles user attempts to create media items
+
+URL: /
+Supported Methods: GET
+Middleware: Requires Secure, Requires Logout
+Description: retrieves login pages
+
+URL: /notFound
+Supported Methods: GET
+Middleware: 
+Description: retrieves endpoint for pages that aren't found

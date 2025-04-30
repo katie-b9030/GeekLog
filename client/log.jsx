@@ -317,14 +317,27 @@ const App = () => {
         </div>
       </div>
     );
-  }
-  return (
-    <div>
-      <div id="showLog">
-        <MediaList isPremium={isPremium} media={[]} reloadMedia={reloadMedia} />
+  } else if (document.getElementById("app").dataset.page === "log") {
+    return (
+      <div>
+        <div id="showLog">
+          <MediaList
+            isPremium={isPremium}
+            media={[]}
+            reloadMedia={reloadMedia}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <div id="notFound">
+          <h2>The page you're looking for can't be found!</h2>
+        </div>
+      </div>
+    );
+  }
 };
 
 const init = () => {
