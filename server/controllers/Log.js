@@ -5,6 +5,8 @@ const { Media } = models;
 const makerPage = (req, res) =>
   res.render("app", { page: "maker", name: req.session.account.name });
 
+// const updatePage = (req, res) => res.render("app", { page: "update", name: req.session.account.name });
+
 const logPage = (req, res) =>
   res.render("app", { page: "log", name: req.session.account.name });
 
@@ -48,6 +50,41 @@ const makeMedia = async (req, res) => {
   }
 };
 
+/* const updateMedia = async (req, res) => {
+  if (!req.body.title) {
+    return res
+      .status(400)
+      .json({ error: "Title selection is required to update media" });
+  }
+
+  const mediaData = {
+    title: req.body.title,
+    format: req.body.format,
+    favoriteCharacters: req.body.favoriteCharacters,
+    comments: req.body.comments,
+    rating: req.body.rating,
+    owner: req.session.account._id,
+  };
+
+  try {
+    const foundMedia = await Log.findById(title);
+    if (!foundMedia) return res.status(404).json({ error: "Media not found!" });
+
+    foundMedia.favoriteCharacters = favoriteCharacters;
+    foundMedia.comments = comments;
+    foundMedia.rating = rating;
+
+    await foundMedia.save();
+
+    return res.status(200).json({ message: "Media successfully updated!" });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "An error occured updating the media!" });
+  }
+}; */
+
 const getMedia = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
@@ -62,8 +99,10 @@ const getMedia = async (req, res) => {
 
 module.exports = {
   makerPage,
+  // updatePage,
   logPage,
   notFoundPage,
   makeMedia,
+  // updateMedia,
   getMedia,
 };

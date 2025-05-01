@@ -30,6 +30,9 @@ const router = (app) => {
   app.get("/maker", mid.requiresLogin, controllers.Log.makerPage);
   app.post("/maker", mid.requiresLogin, controllers.Log.makeMedia);
 
+  // app.get("/update", mid.requiresLogin, controllers.Log.updatePage);
+  // app.post("/update", mid.requiresLogin, controllers.Log.updateMedia);
+
   app.get(
     "/",
     mid.requiresSecure,

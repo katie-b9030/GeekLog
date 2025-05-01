@@ -17,6 +17,14 @@ const handleSubmission = () => {
   document.getElementById("errorMessage").classList.add("hidden");
 };
 
+/* const handleUpdate = () => {
+  document.getElementById("success").textContent =
+    "Media Updated Successfully!";
+  document.getElementById("successMessage").classList.remove("hidden");
+  document.getElementById("error").textContent = "";
+  document.getElementById("errorMessage").classList.add("hidden");
+} */
+
 /* Sends post requests to the server using fetch. Will look for various
    entries in the response JSON object, and will handle them appropriately.
 */

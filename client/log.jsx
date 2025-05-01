@@ -186,6 +186,24 @@ const handleMedia = (e, onMediaAdded, mediaRating) => {
   return false;
 };
 
+/* const handleMediaUpdate = (e, onMediaUpdated, mediaRating) => {
+  e.preventDefault();
+  helper.hideError();
+  const favoriteCharacters = e.target.querySelector("#updateCharacters").value;
+  const comments = e.target.querySelector("#updateComments").value;
+  const rating = mediaRating;
+
+  helper.handleSubmission();
+
+  helper.sendPost(
+    e.target.action,
+    { title, format, favoriteCharacters, comments, rating },
+    onMediaUpdated
+  );
+
+  return false;
+}; */
+
 const RatingSelect = (props) => {
   if (props.isPremium) {
     return (
@@ -276,6 +294,65 @@ const MediaForm = (props) => {
   );
 };
 
+/* const UpdateForm = (props) => {
+  const [media, setMedia] = useState([]);
+  const [mediaRating, setMediaRating] = useState(0);
+
+  const loadMediaFromServer = async () => {
+    const response = await fetch("/getMedia");
+    const data = await response.json();
+    setMedia(data.media);
+  };
+
+  useEffect(() => {
+    loadMediaFromServer();
+  }, [props.reloadMedia]);
+
+  const MediaTitles = media.map((show) => {
+    return (
+      <option className="mediaPieceSelect" value={media.title}>
+        <p className="title">{media.title}</p>
+      </option>
+    );
+  });
+
+  return (
+    <form
+      id="updateForm"
+      onSubmit={(e) => handleMediaUpdate(e, props.triggerReload, mediaRating)}
+      name="updateForm"
+      action="/update"
+      method="POST"
+      className="updateForm"
+    >
+      <select class="mediaSelect">
+        <option value=""></option>
+        {MediaTitles}
+      </select>
+      <label htmlFor="characters">Favorite Characters: </label>
+      <input
+        id="updateCharacters"
+        type="text"
+        name="characters"
+        placeholder="Favorite Characters"
+      />
+      <label htmlFor="comments">Comments: </label>
+      <input
+        id="updateComments"
+        type="text"
+        name="comments"
+        placeholder="Comments"
+      />
+      <RatingSelect
+        isPremium={props.isPremium}
+        rating={mediaRating}
+        setRating={setMediaRating}
+      />
+      <input className="makeMediaSubmit" type="submit" value="Update Media" />
+    </form>
+  );
+}; */
+
 const App = () => {
   const [reloadMedia, setReloadMedia] = useState(false);
   // used ChatGPT to assist with Premium dynamic changing logic
@@ -317,6 +394,17 @@ const App = () => {
         </div>
       </div>
     );
+    /* } else if (document.getElementById("app").dataset.page === "update") {
+    return (
+      <div>
+        <div id="updateMedia">
+          <UpdateForm
+            isPremium={isPremium}
+            triggerReload={() => setReloadMedia(!reloadMedia)}
+          />
+        </div>
+      </div>
+    ); */
   } else if (document.getElementById("app").dataset.page === "log") {
     return (
       <div>
