@@ -1,23 +1,21 @@
-const models = require("../models");
+const models = require('../models');
 
 const { Media } = models;
 
-const makerPage = (req, res) =>
-  res.render("app", { page: "maker", name: req.session.account.name });
+const makerPage = (req, res) => res.render('app', { page: 'maker', name: req.session.account.name });
 
-// const updatePage = (req, res) => res.render("app", { page: "update", name: req.session.account.name });
+// const updatePage = (req, res) =>
+// res.render("app", { page: "update", name: req.session.account.name });
 
-const logPage = (req, res) =>
-  res.render("app", { page: "log", name: req.session.account.name });
+const logPage = (req, res) => res.render('app', { page: 'log', name: req.session.account.name });
 
-const notFoundPage = (req, res) =>
-  res.status(404).render("app", { page: "notFound" });
+const notFoundPage = (req, res) => res.status(404).render('app', { page: 'notFound' });
 
 const makeMedia = async (req, res) => {
   if (!req.body.title || !req.body.format) {
     return res
       .status(400)
-      .json({ error: "Both title and media type are required" });
+      .json({ error: 'Both title and media type are required' });
   }
 
   const mediaData = {
@@ -42,11 +40,11 @@ const makeMedia = async (req, res) => {
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
-      return res.status(400).json({ error: "Media already exists!" });
+      return res.status(400).json({ error: 'Media already exists!' });
     }
     return res
       .status(500)
-      .json({ error: "An error occured making the media!" });
+      .json({ error: 'An error occured making the media!' });
   }
 };
 
@@ -93,7 +91,7 @@ const getMedia = async (req, res) => {
     return res.json({ media: docs });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: "Error retrieving media!" });
+    return res.status(500).json({ error: 'Error retrieving media!' });
   }
 };
 
